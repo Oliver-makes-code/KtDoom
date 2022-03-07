@@ -21,8 +21,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.function.IntConsumer;
 import java.util.logging.Level;
 import java.util.stream.IntStream;
+
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 import mochadoom.Loggers;
 import rr.column_t;
 import rr.patch_t;
@@ -101,7 +102,7 @@ public interface Columns<V, E extends Enum<E>> extends Blocks<V, E> {
     }
     
     class U {
-        static final int COLUMN_THREADS = Engine.getConfig().getValue(Settings.parallelism_patch_columns, Integer.class);
+        static final int COLUMN_THREADS = Engine.Companion.getConfig().getValue(Settings.parallelism_patch_columns, Integer.class);
         private static final ForkJoinPool pool = COLUMN_THREADS > 0 ? new ForkJoinPool(COLUMN_THREADS) : null;
         private U() {}
     }

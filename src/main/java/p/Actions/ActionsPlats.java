@@ -24,9 +24,11 @@ import data.sounds;
 import doom.thinker_t;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ktdoom.Engine;
 import m.Settings;
 import static m.fixed_t.FRACUNIT;
-import mochadoom.Engine;
+
 import mochadoom.Loggers;
 import p.AbstractLevelLoader;
 import static p.ActiveStates.T_PlatRaise;
@@ -214,7 +216,7 @@ public interface ActionsPlats extends ActionsMoveEvents, ActionsUseEvents {
          */
         // Uhh... lemme guess. Needs to resize?
         // Resize but leave extra items empty.
-        if (Engine.getConfig().equals(Settings.extend_plats_limit, Boolean.TRUE)) {
+        if (Engine.Companion.getConfig().equals(Settings.extend_plats_limit, Boolean.TRUE)) {
             plats.activeplats = C2JUtils.resizeNoAutoInit(plats.activeplats, 2 * plats.activeplats.length);
             AddActivePlat(plat);
         } else {

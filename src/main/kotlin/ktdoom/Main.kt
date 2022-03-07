@@ -1,15 +1,12 @@
 package ktdoom
 
-import mochadoom.Engine
 import java.lang.management.ManagementFactory
-
+import ktdoom.Engine
 
 /*
 * KtDoom Entry Point
 * */
 fun main() {
-    val runtimeMxBean = ManagementFactory.getRuntimeMXBean()
-    val args = runtimeMxBean.inputArguments
-    var engine = Engine(*args.toTypedArray())
+    var engine = Engine()
     engine.DOOM.setupLoop()
 }

@@ -22,8 +22,9 @@ import java.awt.GraphicsDevice;
 import java.awt.Image;
 import static java.awt.RenderingHints.*;
 import java.awt.image.ImageObserver;
+
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 
 /**
  * Full-screen switch and scale governor
@@ -83,9 +84,9 @@ public interface FullscreenOptions {
         Best, Native;
     }
     
-    static FullMode FULLMODE = Engine.getConfig().getValue(Settings.fullscreen_mode, FullMode.class);
-    static StretchMode STRETCH = Engine.getConfig().getValue(Settings.fullscreen_stretch, StretchMode.class);
-    static InterpolationMode INTERPOLATION = Engine.getConfig().getValue(Settings.fullscreen_interpolation, InterpolationMode.class);
+    static FullMode FULLMODE = Engine.Companion.getConfig().getValue(Settings.fullscreen_mode, FullMode.class);
+    static StretchMode STRETCH = Engine.Companion.getConfig().getValue(Settings.fullscreen_stretch, StretchMode.class);
+    static InterpolationMode INTERPOLATION = Engine.Companion.getConfig().getValue(Settings.fullscreen_interpolation, InterpolationMode.class);
     
     interface Dimension {
         int width();

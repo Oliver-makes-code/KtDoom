@@ -26,8 +26,9 @@ import java.awt.Toolkit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.logging.Level;
+
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 import mochadoom.Loggers;
 
 /**
@@ -77,7 +78,7 @@ public class DoomWindowController<E extends Component & DoomWindow<E>, H extends
     
     private void sizeInit() {
         try {
-            if (!(Engine.getConfig().equals(Settings.fullscreen, Boolean.TRUE) && switchToFullScreen())) {
+            if (!(Engine.Companion.getConfig().equals(Settings.fullscreen, Boolean.TRUE) && switchToFullScreen())) {
                 updateSize();
             }
         } catch (Exception e) {

@@ -22,7 +22,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import m.IRandom;
 import m.Settings;
-import mochadoom.Engine;
 import rr.patch_t;
 import v.graphics.Horizontal;
 import v.graphics.Plotter;
@@ -30,6 +29,7 @@ import v.graphics.Relocation;
 import v.renderers.DoomScreen;
 import v.scale.VideoScale;
 import v.tables.BlurryTable;
+import ktdoom.Engine;
 
 /** 
  * Refactored a lot of it; most notable changes:
@@ -185,7 +185,7 @@ public interface DoomGraphicSystem<T, V> {
      * Plotter for point-by-point drawing of AutoMap
      */
     default Plotter<V> createPlotter(DoomScreen screen) {
-        switch(Engine.getConfig().getValue(Settings.automap_plotter_style, Plotter.Style.class)) {
+        switch(Engine.Companion.getConfig().getValue(Settings.automap_plotter_style, Plotter.Style.class)) {
             case Thick:
                 return new Plotter.Thick<>(getScreen(screen), getScreenWidth(), getScreenHeight());
             case Deep:

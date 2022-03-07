@@ -23,8 +23,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
+
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 import mochadoom.Loggers;
 import p.Actions.ActionsLights.glow_t;
 import p.Actions.ActionsLights.lightflash_t;
@@ -480,7 +481,7 @@ public class VanillaDSG<T, V> implements IDoomSaveGame {
             }
         }
         
-        if (Engine.getConfig().equals(Settings.reconstruct_savegame_pointers, Boolean.TRUE)) {
+        if (Engine.Companion.getConfig().equals(Settings.reconstruct_savegame_pointers, Boolean.TRUE)) {
             reconstructPointers();
             rewirePointers();
         }

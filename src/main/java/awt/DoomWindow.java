@@ -2,6 +2,8 @@ package awt;
 
 import doom.CommandVariable;
 import doom.event_t;
+import ktdoom.Engine;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Component;
@@ -13,7 +15,6 @@ import java.util.StringTokenizer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import javax.swing.JPanel;
-import mochadoom.Engine;
 
 /** 
  *  Methods specific to Doom-System video interfacing. 
@@ -93,9 +94,9 @@ public interface DoomWindow<E extends Component & DoomWindow<E>> {
         displayname = Game.getCVM().get(CommandVariable.DISP, String.class, 0).orElse(null);
         
         // check for command-line geometry*/
-        if (Engine.getCVM().present(CommandVariable.GEOM)) {
+        if (Engine.Companion.getCVM().present(CommandVariable.GEOM)) {
             try {
-                String eval = Engine.getCVM().get(CommandVariable.GEOM, String.class, 0).get().trim();
+                String eval = Engine.Companion.getCVM().get(CommandVariable.GEOM, String.class, 0).get().trim();
                 // warning: char format, different type arg 3,5
                 //n = sscanf(myargv[pnum+1], "%c%d%c%d", &xsign, &x, &ysign, &y);
                 // OK, so we have to read a string that may contain

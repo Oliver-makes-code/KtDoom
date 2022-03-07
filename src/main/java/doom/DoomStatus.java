@@ -10,8 +10,9 @@ import static g.Signals.ScanCode.*;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.stream.Stream;
+
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 import p.mobj_t;
 
 /**
@@ -522,7 +523,7 @@ public abstract class DoomStatus<T,V> {
     
     public static int compatibility_level;
     
-    public final ConfigManager CM = Engine.getConfig();
+    public final ConfigManager CM = Engine.Companion.getConfig();
     
     public DoomStatus() {
     	this.wminfo=new wbstartstruct_t();

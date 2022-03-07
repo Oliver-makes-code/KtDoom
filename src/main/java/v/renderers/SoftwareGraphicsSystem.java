@@ -25,9 +25,10 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
 import java.awt.image.DataBufferUShort;
 import java.util.Map;
+
+import ktdoom.Engine;
 import m.IRandom;
 import m.Settings;
-import mochadoom.Engine;
 import rr.patch_t;
 import v.DoomGraphicSystem;
 import v.graphics.Blocks;
@@ -107,9 +108,9 @@ abstract class SoftwareGraphicsSystem<T, V>
     @SuppressWarnings("unchecked")
     private V palette(RendererFactory.WithWadLoader<T, V> rf) {
         /*final byte[] */playpal = 
-            Engine.getCVM().bool(CommandVariable.GREYPAL)
+            Engine.Companion.getCVM().bool(CommandVariable.GREYPAL)
                 ? Playpal.greypal()
-                : Engine.getCVM().bool(CommandVariable.NOPLAYPAL)
+                : Engine.Companion.getCVM().bool(CommandVariable.NOPLAYPAL)
                     ? Playpal.properPlaypal(null)
                     : rf.getWadLoader().LoadPlaypal();
         
@@ -131,8 +132,8 @@ abstract class SoftwareGraphicsSystem<T, V>
     
     @SuppressWarnings("unchecked")
     private V[] colormap(RendererFactory.WithWadLoader<T, V> rf) {
-        final boolean colormapEnabled = !Engine.getCVM().bool(CommandVariable.NOCOLORMAP)
-            && Engine.getConfig().equals(Settings.enable_colormap_lump, Boolean.TRUE);
+        final boolean colormapEnabled = !Engine.Companion.getCVM().bool(CommandVariable.NOCOLORMAP)
+            && Engine.Companion.getConfig().equals(Settings.enable_colormap_lump, Boolean.TRUE);
         
         return
             /**
@@ -241,7 +242,7 @@ abstract class SoftwareGraphicsSystem<T, V>
          * Because of switching gamma stops powerup palette except for invlunerablity
          * Settings.fixgammapalette handles the fix
          */
-        if (Engine.getConfig().equals(Settings.fix_gamma_palette, Boolean.FALSE)) {
+        if (Engine.Companion.getConfig().equals(Settings.fix_gamma_palette, Boolean.FALSE)) {
             this.usepalette = 0;
         }
         

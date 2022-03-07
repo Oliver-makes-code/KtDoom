@@ -10,7 +10,8 @@ import static java.awt.RenderingHints.*;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import javax.swing.JFrame;
-import mochadoom.Engine;
+
+import ktdoom.Engine;
 import mochadoom.Loggers;
 
 /**
@@ -60,7 +61,7 @@ public class DoomFrame<Window extends Component & DoomWindow<Window>> extends JF
          */
         setFocusTraversalKeysEnabled(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle(Engine.getEngine().getWindowTitle(0));
+        setTitle(Engine.Companion.getEngine().getWindowTitle(0));
     }
 
     public void turnOn() {
@@ -129,7 +130,7 @@ public class DoomFrame<Window extends Component & DoomWindow<Window>> extends JF
                 final long now = System.currentTimeMillis();
                 final long lambda = now - lastTime;
                 if (lambda >= 100L) {
-                    setTitle(Engine.getEngine().getWindowTitle(frames * 1000.0/lambda));
+                    setTitle(Engine.Companion.getEngine().getWindowTitle(frames * 1000.0/lambda));
                     frames = 0;
                     lastTime = now;
                 }
@@ -159,7 +160,7 @@ public class DoomFrame<Window extends Component & DoomWindow<Window>> extends JF
         return localG2d;
     }
 
-    private final boolean showFPS = Engine.getCVM().bool(CommandVariable.SHOWFPS);
+    private final boolean showFPS = Engine.Companion.getCVM().bool(CommandVariable.SHOWFPS);
     private long lastTime = System.currentTimeMillis();
     private int frames = 0;
 }

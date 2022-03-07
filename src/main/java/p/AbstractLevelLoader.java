@@ -14,10 +14,10 @@ import static doom.SourceCode.P_MapUtl.P_SetThingPosition;
 import doom.SourceCode.R_Main;
 import static doom.SourceCode.R_Main.*;
 import doom.SourceCode.fixed_t;
+import ktdoom.Engine;
 import m.BBox;
 import m.Settings;
 import static m.fixed_t.FRACBITS;
-import mochadoom.Engine;
 import static p.mobj_t.MF_NOBLOCKMAP;
 import static p.mobj_t.MF_NOSECTOR;
 import rr.line_t;
@@ -744,7 +744,7 @@ public abstract class AbstractLevelLoader implements ILevelLoader {
     // A 511x511 blockmap would still have a valid negative number
     // e.g. -1..510, so they would be set to -2
     
-    public static final boolean FIX_BLOCKMAP_512 = Engine.getConfig().equals(Settings.fix_blockmap, Boolean.TRUE);
+    public static final boolean FIX_BLOCKMAP_512 = Engine.Companion.getConfig().equals(Settings.fix_blockmap, Boolean.TRUE);
     public int blockmapxneg = -257;
     public int blockmapyneg = -257;
 

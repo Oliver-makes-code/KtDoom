@@ -22,8 +22,9 @@ import doom.evtype_t;
 import doom.gameaction_t;
 import java.awt.Rectangle;
 import java.io.IOException;
+
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 import rr.flat_t;
 import rr.patch_t;
 import rr.spritedef_t;
@@ -264,7 +265,7 @@ public class Finale<T> {
     public void TextWrite() {
 		// erase the entire screen to a tiled background
 		byte[] src = DOOM.wadLoader.CacheLumpName(finaleflat, PU_CACHE, flat_t.class).data;
-        if (Engine.getConfig().equals(Settings.scale_screen_tiles, Boolean.TRUE)) {
+        if (Engine.Companion.getConfig().equals(Settings.scale_screen_tiles, Boolean.TRUE)) {
             final Object scaled = ((Blocks<Object, DoomScreen>) DOOM.graphicSystem)
                 .ScaleBlock(DOOM.graphicSystem.convertPalettedBlock(src), 64, 64,
                     DOOM.graphicSystem.getScalingX(), DOOM.graphicSystem.getScalingY()

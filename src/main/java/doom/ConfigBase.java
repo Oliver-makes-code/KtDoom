@@ -18,12 +18,14 @@
 package doom;
 
 import data.dstrings;
-import mochadoom.Engine;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+
+import ktdoom.Engine;
 import m.Settings;
 import utils.OSValidator;
 import utils.ResourceIO;
@@ -122,12 +124,12 @@ public enum ConfigBase {
         
         private static String getFolder() {
             return folder != null ? folder : (folder =
-                Engine.getCVM().bool(CommandVariable.SHDEV) ||
-                Engine.getCVM().bool(CommandVariable.REGDEV) ||
-                Engine.getCVM().bool(CommandVariable.FR1DEV) ||
-                Engine.getCVM().bool(CommandVariable.FRDMDEV) ||
-                Engine.getCVM().bool(CommandVariable.FR2DEV) ||
-                Engine.getCVM().bool(CommandVariable.COMDEV)
+                Engine.Companion.getCVM().bool(CommandVariable.SHDEV) ||
+                Engine.Companion.getCVM().bool(CommandVariable.REGDEV) ||
+                Engine.Companion.getCVM().bool(CommandVariable.FR1DEV) ||
+                Engine.Companion.getCVM().bool(CommandVariable.FRDMDEV) ||
+                Engine.Companion.getCVM().bool(CommandVariable.FR2DEV) ||
+                Engine.Companion.getCVM().bool(CommandVariable.COMDEV)
                     ? dstrings.DEVDATA + System.getProperty("file.separator")
                     : ""
             );
@@ -144,7 +146,7 @@ public enum ConfigBase {
         /**
          * If user supplied -config argument, it will only use the values from these files instead of defaults
          */
-        if (!Engine.getCVM()
+        if (!Engine.Companion.getCVM()
             .with(CommandVariable.CONFIG, 0, (String[] fileNames) ->
                 Arrays.stream(fileNames).map(Files::new).forEach(ret::add))
                 

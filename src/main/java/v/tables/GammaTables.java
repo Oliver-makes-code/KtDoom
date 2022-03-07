@@ -21,8 +21,8 @@
 
 package v.tables;
 
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 
 public class GammaTables {
     // Now where did these came from?
@@ -111,7 +111,7 @@ public class GammaTables {
     };
     
     static {
-        if (Engine.getConfig().equals(Settings.fix_gamma_ramp, Boolean.TRUE)) {
+        if (Engine.Companion.getConfig().equals(Settings.fix_gamma_ramp, Boolean.TRUE)) {
             for (int i = 0; i < 128; --LUT[0][i++]) {}
         }
     }

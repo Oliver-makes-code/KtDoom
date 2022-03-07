@@ -1152,7 +1152,7 @@ public class WadLoader implements IWadLoader {
 		// in any chain, observing pwad ordering rules. killough
 
         for (int i = 0; i < numlumps; i++) { // hash function:
-            doomhash.put(lumpinfo[i].name.toUpperCase(), new Integer(i));
+            doomhash.put(lumpinfo[i].name.toUpperCase(), i);
         }
     }
 

@@ -47,6 +47,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
+
+import ktdoom.Engine;
 import m.DelegateRandom;
 import m.IDoomMenu;
 import m.Menu;
@@ -54,7 +56,7 @@ import m.MenuMisc;
 import m.Settings;
 import static m.fixed_t.FRACBITS;
 import static m.fixed_t.MAPFRACUNIT;
-import mochadoom.Engine;
+
 import n.DoomSystemNetworking;
 import n.DummyNetworkDriver;
 import p.AbstractLevelLoader;
@@ -337,7 +339,7 @@ public class DoomMain<T, V> extends DoomStatus<T, V> implements IDoomGameNetwork
         if (!wipe) {
             //System.out.print("Tick "+gametic+"\t");
             //System.out.print(players[0]);
-            Engine.updateFrame(); // page flip or blit buffer
+            Engine.Companion.updateFrame(); // page flip or blit buffer
             return;
         }
 
@@ -361,7 +363,7 @@ public class DoomMain<T, V> extends DoomStatus<T, V> implements IDoomGameNetwork
             soundDriver.UpdateSound();
             soundDriver.SubmitSound();             // update sounds after one wipe tic.
             menu.Drawer();                    // menu is drawn even on top of wipes
-            Engine.updateFrame();             // page flip or blit buffer
+            Engine.Companion.updateFrame();             // page flip or blit buffer
         } while (!done);
     }
 
@@ -1123,7 +1125,7 @@ public class DoomMain<T, V> extends DoomStatus<T, V> implements IDoomGameNetwork
          * 
          * @SourceCode.Compatible
          */
-        if (Engine.getConfig().equals(Settings.fix_sky_change, Boolean.TRUE) && (isCommercial()
+        if (Engine.Companion.getConfig().equals(Settings.fix_sky_change, Boolean.TRUE) && (isCommercial()
                 || ( gamemission == GameMission_t.pack_tnt )
                 || ( gamemission == GameMission_t.pack_plut )))
         {
@@ -2526,7 +2528,7 @@ public class DoomMain<T, V> extends DoomStatus<T, V> implements IDoomGameNetwork
         Arrays.setAll(players, i -> new player_t(this));
 
         // Init objects
-        this.cVarManager = Engine.getCVM();
+        this.cVarManager = Engine.Companion.getCVM();
 
         // Prepare events array with event instances
         Arrays.fill(events, event_t.EMPTY_EVENT);

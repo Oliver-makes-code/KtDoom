@@ -16,8 +16,8 @@
  */
 package v.tables;
 
+import ktdoom.Engine;
 import m.Settings;
-import mochadoom.Engine;
 
 /**
  *
@@ -74,7 +74,7 @@ public enum GreyscaleFilter {
     }
 
     private static void readSetting() {
-        FILTER = Engine.getConfig().getValue(Settings.greyscale_filter, GreyscaleFilter.class);
+        FILTER = Engine.Companion.getConfig().getValue(Settings.greyscale_filter, GreyscaleFilter.class);
     }
         
     public int getComponent(int r, int g, int b) {

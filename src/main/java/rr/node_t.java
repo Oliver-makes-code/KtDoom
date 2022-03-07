@@ -4,12 +4,13 @@ import doom.SourceCode;
 import doom.SourceCode.R_Main;
 import static doom.SourceCode.R_Main.*;
 import doom.SourceCode.fixed_t;
+import ktdoom.Engine;
 import m.BBox;
 import m.ISyncLogger;
 import m.Settings;
 import static m.fixed_t.FRACBITS;
 import static m.fixed_t.FixedMul;
-import mochadoom.Engine;
+
 import p.Resettable;
 import static utils.C2JUtils.eval;
 import static utils.C2JUtils.memset;
@@ -176,7 +177,7 @@ public class node_t implements Resettable {
             < (left = ((x - this.x) >> FRACBITS) * (this.dy >> FRACBITS)) ? 0 : right == left ? 2 : 1;
     }
 
-    private static final boolean OLDDEMO = Engine.getConfig().equals(Settings.line_of_sight, Settings.LOS.Vanilla);
+    private static final boolean OLDDEMO = Engine.Companion.getConfig().equals(Settings.line_of_sight, Settings.LOS.Vanilla);
 
     public int DivlineSide(int x, int y, ISyncLogger SL, boolean sync) {
         int result = DivlineSide(x, y);
