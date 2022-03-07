@@ -45,7 +45,7 @@ class Engine {
             DOOM.graphicSystem.screenHeight
         )
         windowController.observer.addInterest(
-            KeyStateInterest({ obs: EventObserver<EventHandler?>? ->
+            KeyStateInterest({ _: EventObserver<EventHandler?>? ->
                 EventHandler.fullscreenChanges(windowController.observer, windowController.switchFullscreen())
                 KeyStateSatisfaction.WANTS_MORE_ATE
             }, ScanCode.SC_LALT, ScanCode.SC_ENTER)
