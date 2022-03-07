@@ -135,7 +135,7 @@ public class WadLoader implements IWadLoader {
     /**
      * This is where lumps are actually read + loaded from a file.
      * 
-     * @param filename
+     * @param uri
      * @throws Exception
      */
 
@@ -314,7 +314,7 @@ public class WadLoader implements IWadLoader {
 	 *  Of course, they may be way off with deliberately malformed files etc.
 	 *  
 	 * @param header
-	 * @param lumpinfo2
+	 * @param lumpinfo
 	 * @return
 	 */
 	
