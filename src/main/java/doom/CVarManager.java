@@ -25,7 +25,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.logging.Level;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import utils.ResourceIO;
 
 /**
@@ -253,7 +254,7 @@ public class CVarManager {
             try {
                 return Integer.parseInt(arg);
             } catch (NumberFormatException ex) {
-                Loggers.getLogger(CommandVariable.class.getName()).log(Level.WARNING, null, ex);
+                LoggersKt.getLogger(CommandVariable.class.getName()).log(Level.WARNING, null, ex);
                 return null;
             }
         } else if (format == String.class) {
@@ -269,7 +270,7 @@ public class CVarManager {
             | IllegalArgumentException
             | InvocationTargetException ex
         ) {
-            Loggers.getLogger(CommandVariable.class.getName()).log(Level.SEVERE, null, ex);
+            LoggersKt.getLogger(CommandVariable.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

@@ -23,8 +23,8 @@ import java.util.logging.Level;
 import java.util.stream.IntStream;
 
 import ktdoom.Engine;
+import ktdoom.LoggersKt;
 import m.Settings;
-import mochadoom.Loggers;
 import rr.column_t;
 import rr.patch_t;
 
@@ -95,7 +95,7 @@ public interface Columns<V, E extends Enum<E>> extends Blocks<V, E> {
         if (U.COLUMN_THREADS > 0) try {
             U.pool.submit(() -> IntStream.range(0, patch.width).parallel().forEach(task)).get();
         } catch (InterruptedException | ExecutionException ex) {
-            Loggers.getLogger(Columns.class.getName()).log(Level.SEVERE, null, ex);
+            LoggersKt.getLogger(Columns.class.getName()).log(Level.SEVERE, null, ex);
         } else for (int i = 0; i < patch.width; ++i) {
             task.accept(i);
         }

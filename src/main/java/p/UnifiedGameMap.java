@@ -17,10 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ktdoom.Engine;
+import ktdoom.LoggersKt;
 import m.Settings;
 import static m.fixed_t.MAPFRACUNIT;
 
-import mochadoom.Loggers;
 import rr.ISpriteManager;
 import rr.line_t;
 import utils.C2JUtils;
@@ -30,7 +30,7 @@ import static utils.GenericCopy.malloc;
 // // FROM SIGHT
 
 public abstract class UnifiedGameMap implements ThinkerList {
-    private static final Logger LOGGER = Loggers.getLogger(UnifiedGameMap.class.getName());
+    private static final Logger LOGGER = LoggersKt.getLogger(UnifiedGameMap.class.getName());
     
     /**
      * killough's code for thinkers seems to be totally broken in M.D,

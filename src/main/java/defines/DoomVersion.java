@@ -19,7 +19,8 @@ package defines;
 
 import doom.DoomMain;
 import java.util.logging.Level;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import utils.C2JUtils;
 import static utils.C2JUtils.testReadAccess;
 
@@ -86,7 +87,7 @@ public enum DoomVersion {
             }
             
         } catch (IllegalArgumentException ex) {
-            Loggers.getLogger(DoomVersion.class.getName()).log(Level.WARNING, iwad, ex);
+            LoggersKt.getLogger(DoomVersion.class.getName()).log(Level.WARNING, iwad, ex);
         }
 
 		// It's either invalid or we can't read it.

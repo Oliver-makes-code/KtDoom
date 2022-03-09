@@ -26,10 +26,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ktdoom.Engine;
+import ktdoom.LoggersKt;
 import m.Settings;
 import static m.fixed_t.FRACUNIT;
 
-import mochadoom.Loggers;
 import p.AbstractLevelLoader;
 import static p.ActiveStates.T_PlatRaise;
 import p.plat_e;
@@ -49,7 +49,7 @@ public interface ActionsPlats extends ActionsMoveEvents, ActionsUseEvents {
 
     final class Plats {
 
-        static final Logger LOGGER = Loggers.getLogger(ActionsPlats.class.getName());
+        static final Logger LOGGER = LoggersKt.getLogger(ActionsPlats.class.getName());
 
         // activeplats is just a placeholder. Plat objects aren't
         // actually reused, so we don't need an initialized array.

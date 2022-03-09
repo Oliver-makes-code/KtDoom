@@ -30,7 +30,8 @@ import static m.BBox.BOXBOTTOM;
 import static m.BBox.BOXLEFT;
 import static m.BBox.BOXRIGHT;
 import static m.BBox.BOXTOP;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import p.AbstractLevelLoader;
 import p.ActiveStates;
 import p.divline_t;
@@ -77,7 +78,7 @@ public interface ActionsSectors extends ActionsLights, ActionsFloors, ActionsDoo
 
     final class Spawn {
 
-        final static Logger LOGGER = Loggers.getLogger(ActionsSectors.class.getName());
+        final static Logger LOGGER = LoggersKt.getLogger(ActionsSectors.class.getName());
 
         /**
          * who got hit (or NULL)

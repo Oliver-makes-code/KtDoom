@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import javax.swing.JFrame;
 
 import ktdoom.Engine;
-import mochadoom.Loggers;
+import ktdoom.LoggersKt;
 
 /**
  * Common code for Doom's video frames
@@ -121,7 +121,7 @@ public class DoomFrame<Window extends Component & DoomWindow<Window>> extends JF
          * - Good Sign 2017/04/09
          */
         if (localG2d == null) {
-            Loggers.getLogger(DoomFrame.class.getName())
+            LoggersKt.getLogger(DoomFrame.class.getName())
                 .log(Level.INFO, "Starting or switching fullscreen, have no Graphics2d yet, skipping paint");
         } else {
             draw(g2d, imageSupplier.get(), dim, this);

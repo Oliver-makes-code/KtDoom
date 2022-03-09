@@ -10,10 +10,12 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.logging.Level;
+
+import ktdoom.LoggersKt;
 import m.IRandom;
 import static m.fixed_t.FRACBITS;
 import static m.fixed_t.FRACUNIT;
-import mochadoom.Loggers;
+
 import p.Resettable;
 import p.ThinkerList;
 import p.mobj_t;
@@ -190,7 +192,7 @@ public class sector_t implements IReadableDoomObject, IPackableDoomObject, Reset
 
             // Check for overflow. Exit.
             if (h >= MAX_ADJOINING_SECTORS) {
-                Loggers.getLogger(sector_t.class.getName()).log(Level.WARNING,
+                LoggersKt.getLogger(sector_t.class.getName()).log(Level.WARNING,
                     "Sector with more than 20 adjoining sectors\n");
                 break;
             }

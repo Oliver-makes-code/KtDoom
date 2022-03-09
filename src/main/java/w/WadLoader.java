@@ -43,7 +43,8 @@ import java.util.function.IntFunction;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import rr.patch_t;
 import utils.C2JUtils;
 import utils.GenericCopy.ArraySupplier;
@@ -929,7 +930,7 @@ public class WadLoader implements IWadLoader {
                 thebuffer.rewind();
                 lumpcache[lump].unpack(thebuffer);
             } catch (IOException e) {
-                Loggers.getLogger(WadLoader.class.getName()).log(Level.WARNING, String.format(
+                LoggersKt.getLogger(WadLoader.class.getName()).log(Level.WARNING, String.format(
                         "Could not auto-unpack lump %s into an array of objects of class %s", lump, what
                 ), e);
             }

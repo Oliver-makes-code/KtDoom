@@ -24,7 +24,8 @@ import java.awt.image.DataBufferUShort;
 import java.awt.image.VolatileImage;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.logging.Level;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import v.tables.BlurryTable;
 import v.tables.ColorTint;
 import static v.tables.ColorTint.GREY_TINTS;
@@ -122,7 +123,7 @@ class BufferedRenderer16 extends SoftwareParallelVideoRenderer<byte[], short[]> 
         try {
             updateBarrier.await();
         } catch (InterruptedException | BrokenBarrierException e) {
-            Loggers.getLogger(BufferedRenderer32.class.getName()).log(Level.SEVERE, e, null);
+            LoggersKt.getLogger(BufferedRenderer32.class.getName()).log(Level.SEVERE, e, null);
         }
     }
 
@@ -182,7 +183,7 @@ class BufferedRenderer16 extends SoftwareParallelVideoRenderer<byte[], short[]> 
             try {
                 updateBarrier.await();
             } catch (InterruptedException | BrokenBarrierException e) {
-                Loggers.getLogger(BufferedRenderer32.class.getName()).log(Level.WARNING, e, null);
+                LoggersKt.getLogger(BufferedRenderer32.class.getName()).log(Level.WARNING, e, null);
             }
         }
     }

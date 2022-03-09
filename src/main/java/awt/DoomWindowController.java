@@ -28,8 +28,8 @@ import java.util.function.Supplier;
 import java.util.logging.Level;
 
 import ktdoom.Engine;
+import ktdoom.LoggersKt;
 import m.Settings;
-import mochadoom.Loggers;
 
 /**
  * Display, its configuration and resolution related stuff,
@@ -82,7 +82,7 @@ public class DoomWindowController<E extends Component & DoomWindow<E>, H extends
                 updateSize();
             }
         } catch (Exception e) {
-            Loggers.getLogger(DoomWindow.class.getName()).log(Level.SEVERE,
+            LoggersKt.getLogger(DoomWindow.class.getName()).log(Level.SEVERE,
                     String.format("Error creating DOOM AWT frame. Exiting. Reason: %s", e.getMessage()), e);
             throw e;
         }
@@ -97,7 +97,7 @@ public class DoomWindowController<E extends Component & DoomWindow<E>, H extends
     }
 
     public boolean switchFullscreen() {
-        Loggers.getLogger(DoomFrame.class.getName()).log(Level.WARNING, "FULLSCREEN SWITHED");
+        LoggersKt.getLogger(DoomFrame.class.getName()).log(Level.WARNING, "FULLSCREEN SWITHED");
         // remove the frame from view
         doomFrame.dispose();
         doomFrame = new DoomFrame<>(dimension, component, doomFrame.imageSupplier);

@@ -25,9 +25,10 @@ import doom.SourceCode.actionf_p2;
 import doom.SourceCode.actionf_v;
 import doom.player_t;
 import doom.thinker_t;
+import ktdoom.LoggersKt;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mochadoom.Loggers;
 
 /**
  * In vanilla doom there is union called actionf_t that can hold
@@ -172,16 +173,16 @@ public enum ActiveStates {
     T_PlatRaise(ActionFunctions::T_PlatRaise, ThinkerConsumer.class),
     T_SlidingDoor(ActionFunctions::T_SlidingDoor, ThinkerConsumer.class);
     
-    private final static Logger LOGGER = Loggers.getLogger(ActiveStates.class.getName());
+    private final static Logger LOGGER = LoggersKt.getLogger(ActiveStates.class.getName());
     
     private final ParamClass<?> actionFunction;
     private final Class<? extends ParamClass<?>> paramType;
 
-    private <T extends ParamClass<?>> ActiveStates(final T actionFunction, final Class<T> paramType) {
+    <T extends ParamClass<?>> ActiveStates(final T actionFunction, final Class<T> paramType) {
         this.actionFunction = actionFunction;
         this.paramType = paramType;
     }
-    
+
     private static void nop(Object... o) {}
 
     @actionf_p1

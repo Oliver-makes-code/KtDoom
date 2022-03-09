@@ -2,7 +2,8 @@ package p.Actions;
 
 import doom.thinker_t;
 import java.util.logging.Level;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import p.AbstractLevelLoader;
 import static p.ActiveStates.T_SlidingDoor;
 import p.mobj_t;
@@ -185,7 +186,7 @@ public interface ActionsSlideDoors extends ActionTrait {
             return;
         }
 
-        Loggers.getLogger(ActionsSlideDoors.class.getName()).log(Level.WARNING, "EV_SlidingDoor");
+        LoggersKt.getLogger(ActionsSlideDoors.class.getName()).log(Level.WARNING, "EV_SlidingDoor");
 
         // Make sure door isn't already being animated
         sec = line.frontsector;

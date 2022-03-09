@@ -27,6 +27,8 @@ import static awt.EventBase.sortHandlers;
 import doom.event_t;
 import doom.evtype_t;
 import g.Signals;
+import ktdoom.LoggersKt;
+
 import java.awt.AWTEvent;
 import java.awt.AWTException;
 import java.awt.Component;
@@ -43,7 +45,6 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mochadoom.Loggers;
 
 /**
  * Observer for AWTEvents. The description would be short in contrary to the description
@@ -60,7 +61,7 @@ import mochadoom.Loggers;
 public class EventObserver<Handler extends Enum<Handler> & EventBase<Handler>> {
     
     static final Optional<Robot> MOUSE_ROBOT = createRobot();
-    private static final Logger LOGGER = Loggers.getLogger(EventObserver.class.getName());
+    private static final Logger LOGGER = LoggersKt.getLogger(EventObserver.class.getName());
 
     /**
      * The Robot does not necessary gets created. When not, it throws an exception.
@@ -81,7 +82,7 @@ public class EventObserver<Handler extends Enum<Handler> & EventBase<Handler>> {
         try {
             return Optional.of(new Robot());
         } catch (AWTException e) {
-            Loggers.getLogger(EventObserver.class.getName())
+            LoggersKt.getLogger(EventObserver.class.getName())
                 .log(Level.SEVERE, "AWT Robot could not be created, mouse input focus will be loose!", e);
         }
         return Optional.empty();
@@ -190,7 +191,7 @@ public class EventObserver<Handler extends Enum<Handler> & EventBase<Handler>> {
         }
         
         // In case of debug. If level > FINE (most of cases) it will not affect anything
-        Loggers.LogEvent(LOGGER, actionStateHolder, handler, ev);
+        LoggersKt.LogEvent(LOGGER, actionStateHolder, handler, ev);
         
         actionStateHolder.run(handler, ActionMode.PERFORM, ev);
         actionStateHolder.adjustments(handler).forEach((relation, affected) -> {

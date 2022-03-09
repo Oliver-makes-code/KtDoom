@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 import ktdoom.Engine;
+import ktdoom.LoggersKt;
 import m.Settings;
-import mochadoom.Loggers;
 import p.Actions.ActionsLights.glow_t;
 import p.Actions.ActionsLights.lightflash_t;
 import static p.ActiveStates.*;
@@ -87,7 +87,7 @@ public class VanillaDSG<T, V> implements IDoomSaveGame {
             byte terminator = f.readByte();
             return terminator == 0x1D;
         } catch (IOException e) {
-            Loggers.getLogger(VanillaDSG.class.getName()).log(Level.WARNING, e, () -> 
+            LoggersKt.getLogger(VanillaDSG.class.getName()).log(Level.WARNING, e, () ->
                 String.format("Error while loading savegame! Cause: %s", e.getMessage()));
             return false; // Needed to shut up compiler.
         }
@@ -509,7 +509,7 @@ public class VanillaDSG<T, V> implements IDoomSaveGame {
         }
 
         if (player == 0) {
-            Loggers.getLogger(VanillaDSG.class.getName()).log(Level.WARNING,
+            LoggersKt.getLogger(VanillaDSG.class.getName()).log(Level.WARNING,
                 "Player not found, cannot reconstruct pointers!");
             return;
         }
@@ -858,7 +858,7 @@ public class VanillaDSG<T, V> implements IDoomSaveGame {
             // TODO: the rest...
             f.write(0x1D);
         } catch (IOException e) {
-            Loggers.getLogger(VanillaDSG.class.getName()).log(Level.WARNING, e, () -> 
+            LoggersKt.getLogger(VanillaDSG.class.getName()).log(Level.WARNING, e, () ->
                 String.format("Error while saving savegame! Cause: %s", e.getMessage()));
             return false; // Needed to shut up compiler.
         }

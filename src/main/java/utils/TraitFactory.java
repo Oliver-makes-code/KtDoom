@@ -16,6 +16,8 @@
  */
 package utils;
 
+import ktdoom.LoggersKt;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -26,7 +28,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
-import mochadoom.Loggers;
 
 /**
  * Purpose of this pattern-interface: store Trait-specific class-wise context objects
@@ -94,7 +95,7 @@ import mochadoom.Loggers;
  *    as negligible as one level of indirection + array access by int.
  */
 public class TraitFactory {
-    private final static Logger LOGGER = Loggers.getLogger(TraitFactory.class.getName());
+    private final static Logger LOGGER = LoggersKt.getLogger(TraitFactory.class.getName());
     
     public static <T extends Trait> SharedContext build(T traitUser, KeyChain usedChain)
         throws IllegalArgumentException, IllegalAccessException

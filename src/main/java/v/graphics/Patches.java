@@ -17,7 +17,8 @@
 package v.graphics;
 
 import java.util.logging.Level;
-import mochadoom.Loggers;
+
+import ktdoom.LoggersKt;
 import rr.patch_t;
 import utils.C2JUtils;
 import static v.DoomGraphicSystem.V_FLIPPEDPATCH;
@@ -123,7 +124,7 @@ public interface Patches<V, E extends Enum<E>> extends Columns<V, E> {
      *  - Good Sign 2017/04/22
      */
     default void printDebugPatchInfo(patch_t patch, int x, int y, final boolean predevide, final boolean scaleOffset, final boolean scaleStart, int dupx, int dupy) {
-        Loggers.getLogger(Patches.class.getName()).log(Level.INFO, () -> String.format(
+        LoggersKt.getLogger(Patches.class.getName()).log(Level.INFO, () -> String.format(
             "V_DrawPatch: bad patch (ignored)\n" +
             "Patch %s at %d, %d exceeds LFB\n" + 
             "\tpredevide: %s\n" +
