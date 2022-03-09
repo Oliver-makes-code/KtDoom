@@ -908,7 +908,7 @@ enum class Color(val range: Int, val value: Byte) {
 
     init {
         if (range >= NUMLITES)
-            liteBlock = ByteArray(8)
+            liteBlock = ByteArray(NUMLITES)
         else
             liteBlock = null
     }
