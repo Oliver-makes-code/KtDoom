@@ -24,4 +24,6 @@ class mline_t {
         this.bx = 0
         this.by = 0
     }
+
+    override fun toString(): String = "($ax,$ay), ($bx,$by)"
 }

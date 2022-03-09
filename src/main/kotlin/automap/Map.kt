@@ -3,6 +3,7 @@ package automap
 import data.Defines
 import data.Limits
 import data.Tables
+import data.doomdata.ML_MAPPED
 import doom.*
 import doom.SourceCode.AM_Map
 import g.Signals.ScanCode
@@ -20,7 +21,7 @@ import java.util.*
 
 val NUMLITES = 8
 
-class Map_<T,V>(val DOOM: DoomMain<T, V>) : IAutoMap<T,V> {
+class Map<T,V> : IAutoMap<T,V> {
     companion object {
         val BACKGROUND: Color = Color.BLACK
         val YOURCOLORS: Color = Color.WHITE
@@ -69,6 +70,7 @@ class Map_<T,V>(val DOOM: DoomMain<T, V>) : IAutoMap<T,V> {
         const val M_ZOOMIN = (1.02 * fixed_t.FRACUNIT).toInt()
         const val M_ZOOMOUT = (fixed_t.FRACUNIT / 1.02).toInt()
     }
+    val DOOM: DoomMain<T,V>
     val fixedColorSources: EnumMap<Color, V> = EnumMap<Color, V>(Color::class.java)
     val litedColorSources: EnumMap<Color, V> = EnumMap<Color, V>(Color::class.java)
     var overlay = 0
@@ -154,7 +156,10 @@ class Map_<T,V>(val DOOM: DoomMain<T, V>) : IAutoMap<T,V> {
     private var rotx = 0
     private var roty:Int = 0
 
-    init {
+
+
+    constructor(DOOM: DoomMain<T,V>) {
+        this.DOOM = DOOM
         this.markpoints = GenericCopy.malloc(
             { mpoint_t() },
             ::getPointArr, AM_NUMMARKPOINTS
@@ -168,11 +173,23 @@ class Map_<T,V>(val DOOM: DoomMain<T, V>) : IAutoMap<T,V> {
         finit_height = DOOM.vs.screenHeight - 32 * DOOM.vs.safeScaling
     }
 
-    fun getPointArr(len: Int): Array<mpoint_t> = Array(len, {mpoint_t()})
-    private fun FTOM(x: Int): Int = fixed_t.FixedMul(x shl 16, scale_ftom)
-    private fun MTOF(x: Int): Int = fixed_t.FixedMul(x, scale_mtof) shr 16
-    private fun CXMTOF(x: Int): Int = f_x + MTOF(x - m_x)
-    private fun CYMTOF(y: Int): Int = f_y + (f_h - MTOF(y - m_y))
+
+
+    fun getPointArr(len: Int): Array<mpoint_t> {return Array(len, {mpoint_t()})}
+    private fun FTOM(x: Int): Int {return fixed_t.FixedMul(x shl 16, scale_ftom)}
+    private fun MTOF(x: Int): Int {return fixed_t.FixedMul(x, scale_mtof) shr 16}
+    private fun CXMTOF(x: Int): Int {return f_x + MTOF(x - m_x)}
+    private fun CYMTOF(y: Int): Int {return f_y + (f_h - MTOF(y - m_y))}
+
+    fun getIslope(ml: mline_t, `is`: islope_t) {
+        val dx: Int
+        val dy: Int
+        dy = ml.ay!! - ml.by!!
+        dx = ml.bx!! - ml.ax!!
+        if (dy == 0) `is`.islp = (if (dx < 0) -Limits.MAXINT else Limits.MAXINT) else `is`.islp =
+            fixed_t.FixedDiv(dx, dy)
+        if (dx == 0) `is`.slp = (if (dy < 0) -Limits.MAXINT else Limits.MAXINT) else `is`.slp = fixed_t.FixedDiv(dy, dx)
+    }
 
     fun initVectorGraphics() {
         var R = 8 * Defines.PLAYERRADIUS / 7
@@ -551,21 +568,23 @@ class Map_<T,V>(val DOOM: DoomMain<T, V>) : IAutoMap<T,V> {
         val cdWallColorSource = litedColorSources[CDWALLCOLORS]
         val tsWallColorSource = litedColorSources[TSWALLCOLORS]
         val secretWallColorSource = litedColorSources[SECRETWALLCOLORS]
+
         for (i in 0 until DOOM.levelLoader.numlines) {
             l.ax = DOOM.levelLoader.lines[i].v1x
             l.ay = DOOM.levelLoader.lines[i].v1y
             l.bx = DOOM.levelLoader.lines[i].v2x
             l.by = DOOM.levelLoader.lines[i].v2y
-            if ((cheating != 0 || (DOOM.levelLoader.lines[i].flags != 0.toShort()) && line_t.ML_MAPPED != 0)) {
-                if (DOOM.levelLoader.lines[i].flags != 0.toShort() && LINE_NEVERSEE != 0.toShort() && cheating.inv() != 0) continue
+
+            //*
+            if (cheating or (DOOM.levelLoader.lines[i].flags.toInt() and ML_MAPPED) != 0) {
+
+                if (DOOM.levelLoader.lines[i].flags.toInt() and LINE_NEVERSEE.toInt() and cheating.inv() != 0) continue
                 if (DOOM.levelLoader.lines[i].backsector == null) {
                     drawMline(l, wallColorSource!!)
                 } else {
-                    if (DOOM.levelLoader.lines[i].special.toInt() == 39) { // teleporters
+                    if (DOOM.levelLoader.lines[i].special.toInt() == 39) {
                         drawMline(l, teleColorSource!!)
-                    } else if ((DOOM.levelLoader.lines[i].flags != 0.toShort()) && (line_t.ML_SECRET != 0)) // secret
-                    // door
-                    {
+                    } else if (DOOM.levelLoader.lines[i].flags.toInt() and line_t.ML_SECRET != 0) {
                         if (cheating != 0) drawMline(l, secretWallColorSource!!) else drawMline(l, wallColorSource!!)
                     } else if (DOOM.levelLoader.lines[i].backsector.floorheight != DOOM.levelLoader.lines[i].frontsector.floorheight) {
                         drawMline(l, fdWallColorSource!!)
@@ -576,13 +595,13 @@ class Map_<T,V>(val DOOM: DoomMain<T, V>) : IAutoMap<T,V> {
                     }
                 }
             } else if (plr!!.powers[Defines.pw_allmap] != 0) {
-                if ((DOOM.levelLoader.lines[i].flags != 0.toShort()) && (LINE_NEVERSEE == 0.toShort())) litedColorSources[MAPPOWERUPSHOWNCOLORS]?.let {
-                    drawMline(
-                        l,
-                        it
-                    )
-                }
+                if (DOOM.levelLoader.lines[i].flags.toInt() and LINE_NEVERSEE.toInt() == 0) drawMline(
+                    l,
+                    litedColorSources[MAPPOWERUPSHOWNCOLORS]!!
+                )
             }
+
+            // */
         }
     }
 
